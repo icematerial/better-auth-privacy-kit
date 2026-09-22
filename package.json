@@ -1,0 +1,63 @@
+{
+  "name": "better-auth-privacy-kit",
+  "version": "0.1.0",
+  "description": "Privacy tooling for Better Auth: data export, consent history, anonymization, and optional hard deletion.",
+  "keywords": [
+    "better-auth",
+    "privacy",
+    "consent",
+    "data-export",
+    "anonymization",
+    "typescript"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.ja.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "better-auth": ">=1.7.0 <2",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "better-auth": "^1.7.5",
+    "typescript": "^5.8.3",
+    "vitest": "^5.0.0",
+    "zod": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icematerial/better-auth-privacy-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/icematerial/better-auth-privacy-kit/issues"
+  },
+  "homepage": "https://github.com/icematerial/better-auth-privacy-kit#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

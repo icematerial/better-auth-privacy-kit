@@ -123,7 +123,7 @@ export const privacyKit = (options: PrivacyKitOptions = {}) => {
         pathMatcher: (path: string) =>
           path === "/privacy/anonymize" || path === "/privacy/delete",
         window: 60,
-        limit: 5,
+        max: 5,
       },
     ],
 
@@ -267,7 +267,7 @@ export const privacyKit = (options: PrivacyKitOptions = {}) => {
 
           // Revoke access first so an anonymized identity cannot keep using an
           // old session or linked OAuth/credential account.
-          await ctx.context.internalAdapter.deleteSessions(userId);
+          await ctx.context.internalAdapter.deleteSessions([userId]);
           await ctx.context.internalAdapter.deleteAccounts(userId);
 
           await ctx.context.adapter.update({

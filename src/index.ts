@@ -229,36 +229,115 @@ export const privacyKit = (options: PrivacyKitOptions = {}) => {
         async (ctx) => {
           if (!consentEnabled) forbidden("Consent history is disabled.");
 
-         ÛÛœİ™XÛÜ™ÈH]ØZ]İ˜ÛÛ^˜Y\\‹™š[™X[OÛÛœÙ[™XÛÜ™ŠÂˆ[Ù[ˆœš]˜XŞPÛÛœÙ[‹ˆÚ\™NˆÂˆÈšY[ˆ\Ù\’Y‹˜[YNˆİ˜ÛÛ^œÙ\ÜÚ[Û‹\Ù\‹šYKˆKˆÛÜNˆÈšY[ˆ˜Ü™X]Y]‹\™Xİ[Ûˆ™\ØÈˆKˆJNÂ‚ˆ™]\›ˆİšœÛÛŠ™XÛÜ™Ë›X\
-Ù\šX[^™PÛÛœÙ[
-JNÂˆKˆ
-K‚ˆ[›Û[Z^™Tš]˜XŞPXØÛİ[ˆÜ™X]P]][™Ú[
-ˆ‹Üš]˜XŞKØ[›Û[Z^™H‹ˆÂˆY]Ùˆ”ÔÕ‹ˆ›ÙNˆÛÛ™š\›X][Û”ØÚ[XKˆ\ÙNˆÜÙ\ÜÚ[Û“ZY]Ø\™WKˆKˆ\Ş[˜È
-İ
-HOˆÂˆYˆ
-X[›Û[Z^™Q[˜X›Y
-H›Ü˜šY[ŠXØÛİ[[›Û[Z^˜][Ûˆ\È\ØX›YˆŠNÂˆYˆ
-İ˜›ÙK˜ÛÛ™š\›X][ÛˆOOHS“Ó–SRV‘HŠHÂˆ˜Y™\]Y\İ
-	ÔÙ]ÛÛ™š\›X][ÛˆÈS“Ó–SRV‘HˆÈÛÛ[YK‰ÊNÂˆB‚ˆÛÛœİ\Ù\’YHİ˜ÛÛ^œÙ\ÜÚ[Û‹\Ù\‹šYÂˆÛÛœİİ\œ™[\Ù\ˆHÔZ[”™XÛÜ™
-İ˜ÛÛ^œÙ\ÜÚ[Û‹\Ù\ŠNÂ‚ˆ]ØZ]Ü[ÛœË˜[›Û[Z^™OË˜™Y›Ü™OËŠÈ\Ù\’YJNÂ‚ˆÛÛœİY][Û˜[\Ù\‘šY[ÈBˆ
-]ØZ]Ü[ÛœË˜[›Û[Z^™OË˜Y][Û˜[\Ù\‘šY[ÏËŠÂˆ\Ù\’Yˆ\Ù\ˆİ\œ™[\Ù\‹ˆJJHÏÈßNÂ‚ˆËÈ™]›ÚÙHXØÙ\ÜÈš\œİÛÈ[ˆ[›Û[Z^™YY[]HØ[››İÙY\\Ú[™È[‚ˆËÈÛÙ\ÜÚ[ÛˆÜˆ[šÙYĞ]]ØÜ™Y[X[XØÛİ[‚ˆ]ØZ]İ˜ÛÛ^š[\›˜[Y\\‹™[]TÙ\ÜÚ[ÛœÊ\Ù\’Y
-NÂˆ]ØZ]İ˜ÛÛ^š[\›˜[Y\\‹™[]PXØÛİ[Ê\Ù\’Y
-NÂ‚ˆ]ØZ]İ˜ÛÛ^˜Y\\‹\]JÂˆ[Ù[ˆ\Ù\ˆ‹ˆÚ\™NˆŞÈšY[ˆšY‹˜[YNˆ\Ù\’YWKˆ\]NˆÂˆ‹‹˜Y][Û˜[\Ù\‘šY[Ëˆ˜[YNˆÜ[ÛœË˜[›Û[Z^™OËœXÙZÛ\“˜[YHÏÈ‘[]Y\Ù\ˆ‹ˆ[XZ[ˆÜ™X]P[›Û[[İ\Ñ[XZ[
+          const records = await ctx.context.adapter.findMany<ConsentRecord>({
+            model: "privacyConsent",
+            where: [
+              { field: "userId", value: ctx.context.session.user.id },
+            ],
+            sortBy: { field: "createdAt", direction: "desc" },
+          });
 
-Kˆ[XZ[™\šYšYYˆ˜[ÙKˆ[XYÙNˆ[ˆ\]Y]ˆ™]È]J
-KˆKˆJNÂ‚ˆYˆ
-ZÙY\ÛÛœÙ[\İÜH	‰ˆÛÛœÙ[[˜X›Y
-HÂˆ]ØZ]İ˜ÛÛ^˜Y\\‹™[]SX[JÂˆ[Ù[ˆœš]˜XŞPÛÛœÙ[‹ˆÚ\™NˆŞÈšY[ˆ\Ù\’Y‹˜[YNˆ\Ù\’YWKˆJNÂˆB‚ˆ]ØZ]Ü[ÛœË˜[›Û[Z^™OË˜Y\ËŠÈ\Ù\’YJNÂ‚ˆ™]\›ˆİšœÛÛŠÂˆİXØÙ\ÜÎˆYKˆ\Ù\’Yˆ[ÙNˆ˜[›Û[Z^™Yˆ\ÈÛÛœİˆJNÂˆKˆ
-K‚ˆ[]Tš]˜XŞPXØÛİ[ˆÜ™X]P]][™Ú[
-ˆ‹Üš]˜XŞKÙ[]H‹ˆÂˆY]Ùˆ”ÔÕ‹ˆ›ÙNˆÛÛ™š\›X][Û”ØÚ[XKˆ\ÙNˆÜÙ\ÜÚ[Û“ZY]Ø\™WKˆKˆ\Ş[˜È
-İ
-HOˆÂˆYˆ
-Z\™[]Q[˜X›Y
-HÂˆ›Ü˜šY[Šˆ’\™[][Ûˆ\È\ØX›Yˆ[˜X›H\™[]H^XÚ]HÜˆ\ÙH™]\ˆ]]	ÜÈZ[Z[ˆ[]K]\Ù\ˆ›İËˆ‹ˆ
-NÂˆBˆYˆ
-İ˜›ÙK˜ÛÛ™š\›X][ÛˆOOH‘SUHŠHÂˆ˜Y™\]Y\İ
-	ÔÙ]ÛÛ™š\›X][ÛˆÈ‘SUHˆÈÛÛ[YK‰ÊNÂˆB‚ˆÛÛœİ\Ù\’YHİ˜ÛÛ^œÙ\ÜÚ[Û‹\Ù\‹šYÂˆ]ØZ]Ü[ÛœËš\™[]OË˜™Y›Ü™OËŠÈ\Ù\’YJNÂ‚ˆYˆ
-ÛÛœÙ[[˜X›Y
-HÂˆ]ØZ]İ˜ÛÛ^˜Y\\‹™[]SX[JÂˆ[Ù[ˆœš]˜XŞPÛÛœÙ[‹ˆÚ\™NˆŞÈšY[ˆ\Ù\’Y‹˜[YNˆ\Ù\’YWKˆJNÂˆB‚ˆËÈ™]\ˆ]]	ÜÈ[\›˜[[]U\Ù\ˆ[™\ÈÙ\ÜÚ[ÛœËØXØÛİ[Ëİ\Ù\‹‚ˆ]ØZ]İ˜ÛÛ^š[\›˜[Y\\‹™[]U\Ù\Š\Ù\’Y
-NÂˆ]ØZ]Ü[ÛœËš\™[]OË˜Y\ËŠÈ\Ù\’YJNÂ‚ˆ™]\›ˆİšœÛÛŠÂˆİXØÙ\ÜÎˆYKˆ\Ù\’Yˆ[ÙNˆ™[]Yˆ\ÈÛÛœİˆJNÂˆKˆ
-KˆKˆHØ]\ÙšY\È™]\]]YÚ[ÂŸNÂ
+          return ctx.json(records.map(serializeConsent));
+        },
+      ),
+
+      anonymizePrivacyAccount: createAuthEndpoint(
+        "/privacy/anonymize",
+        {
+          method: "POST",
+          body: confirmationSchema,
+          use: [sessionMiddleware],
+        },
+        async (ctx) => {
+          if (!anonymizeEnabled) forbidden("Account anonymization is disabled.");
+          if (ctx.body.confirmation !== "ANONYMIZE") {
+            badRequest('Set confirmation to "ANONYMIZE" to continue.');
+          }
+
+          const userId = ctx.context.session.user.id;
+          const currentUser = toPlainRecord(ctx.context.session.user);
+
+          await options.anonymize?.before?.({ userId });
+
+          const additionalUserFields =
+            (await options.anonymize?.additionalUserFields?.({
+              userId,
+              user: currentUser,
+            })) ?? {};
+
+          // Revoke access first so an anonymized identity cannot keep using an
+          // old session or linked OAuth/credential account.
+          await ctx.context.internalAdapter.deleteSessions(userId);
+          await ctx.context.internalAdapter.deleteAccounts(userId);
+
+          await ctx.context.adapter.update({
+            model: "user",
+            where: [{ field: "id", value: userId }],
+            update: {
+              ...additionalUserFields,
+              name: options.anonymize?.placeholderName ?? "Deleted User",
+              email: createAnonymousEmail(),
+              emailVerified: false,
+              image: null,
+              updatedAt: new Date(),
+            },
+          });
+
+          if (!keepConsentHistory && consentEnabled) {
+            await ctx.context.adapter.deleteMany({
+              model: "privacyConsent",
+              where: [{ field: "userId", value: userId }],
+            });
+          }
+
+          await options.anonymize?.after?.({ userId });
+
+          return ctx.json({
+            success: true,
+            userId,
+            mode: "anonymized" as const,
+          });
+        },
+      ),
+
+      deletePrivacyAccount: createAuthEndpoint(
+        "/privacy/delete",
+        {
+          method: "POST",
+          body: confirmationSchema,
+          use: [sessionMiddleware],
+        },
+        async (ctx) => {
+          if (!hardDeleteEnabled) {
+            forbidden(
+              "Hard deletion is disabled. Enable hardDelete explicitly or use Better Auth's built-in delete-user flow.",
+            );
+          }
+          if (ctx.body.confirmation !== "DELETE") {
+            badRequest('Set confirmation to "DELETE" to continue.');
+          }
+
+          const userId = ctx.context.session.user.id;
+          await options.hardDelete?.before?.({ userId });
+
+          if (consentEnabled) {
+            await ctx.context.adapter.deleteMany({
+              model: "privacyConsent",
+              where: [{ field: "userId", value: userId }],
+            });
+          }
+
+          // Better Auth's internal deleteUser handles sessions/accounts/user.
+          await ctx.context.internalAdapter.deleteUser(userId);
+          await options.hardDelete?.after?.({ userId });
+
+          return ctx.json({
+            success: true,
+            userId,
+            mode: "deleted" as const,
+          });
+        },
+      ),
+    },
+  } satisfies BetterAuthPlugin;
+};
